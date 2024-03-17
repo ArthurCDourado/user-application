@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-users-add-edit',
-  templateUrl: './users-add-edit.component.html',
-  styleUrl: './users-add-edit.component.css'
+  selector: 'app-contatos-add-edit',
+  templateUrl: './contatos-add-edit.component.html',
+  styleUrl: './contatos-add-edit.component.css'
 })
-export class UsersAddEditComponent implements OnInit {
+export class ContatosAddEditComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) {}
 
