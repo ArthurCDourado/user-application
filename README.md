@@ -1,6 +1,27 @@
 # UserApplication
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3.
+Projeto Angular CRUD com Tela de Login
+
+Este é um projeto Angular que oferece funcionalidades básicas de CRUD (Create, Read, Update, Delete) juntamente com uma tela de login para autenticação de usuários. O projeto foi desenvolvido com o objetivo de fornecer uma estrutura inicial para a construção de sistemas web que exigem operações CRUD em conjunto com autenticação de usuários.
+Funcionalidades:
+
+    Autenticação de Usuários:
+        Uma tela de login simples que requer autenticação para acessar as funcionalidades do sistema.
+        Verificação de credenciais de usuário no backend para garantir acesso seguro.
+
+    Operações CRUD:
+        Create (Criar): Permite adicionar novos registros ao sistema.
+        Read (Ler): Mostra uma lista dos registros existentes, permitindo visualizar detalhes de cada item.
+        Update (Atualizar): Permite editar informações de registros existentes.
+        Delete (Excluir): Permite remover registros do sistema.
+
+Tecnologias Utilizadas:
+
+    Angular: Um framework de desenvolvimento web baseado em TypeScript para a construção de aplicações SPA (Single Page Application).
+
+    Bootstrap: Uma ferramenta valiosa para o desenvolvimento frontend, permitindo aos desenvolvedores criar rapidamente interfaces web modernas e responsivas, economizando tempo e esforço no processo de desenvolvimento.
+
+Esse projeto foi gerado com o [Angular CLI](https://github.com/angular/angular-cli) versão 17.2.3.
 
 ## Development server
 
