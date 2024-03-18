@@ -7,17 +7,20 @@ import { ContatoService } from './services/http/contato.service';
 import { AuthService } from './services/http/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpInterceptorService } from './interceptors/interceptor-http.service';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 
 @NgModule({
-  providers: [ StorageService, AuthGuard, ContatoService, AuthService, HttpInterceptorService ],
+  providers: [ provideNgxMask(), StorageService, AuthGuard, ContatoService, AuthService, HttpInterceptorService ],
   declarations: [],
   imports: [
+    NgxMaskDirective, NgxMaskPipe,
     HttpClientModule,
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
     CommonModule
-  ]
+  ], 
+  exports: [NgxMaskDirective, NgxMaskPipe]
 })
 export class CoreModule { }

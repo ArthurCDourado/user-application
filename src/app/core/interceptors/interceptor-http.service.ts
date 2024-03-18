@@ -12,10 +12,6 @@ export class HttpInterceptorService implements HttpInterceptor {
   buildHeader(request: HttpRequest<any>): object {
     const authToken = `Bearer ${this.storage.token}`
 
-    console.log(request.headers.has('Authorization'));
-    console.log(this.storage.isAuthenticated());
-    
-
     return {
       setHeaders: {
         ...!(request.headers.has('Authorization')) && {'Authorization': this.storage.isAuthenticated() ? authToken : ''},

@@ -5,6 +5,7 @@ import { ContatosRoutingModule } from './contatos-routing.module';
 import { CoreModule } from '../../core/core.module';
 import { ContatosAddEditComponent } from './contatos-add-edit/contatos-add-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 
 
@@ -14,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ContatosAddEditComponent
   ],
   imports: [
+    NgxDropzoneModule,
     CoreModule,
     ReactiveFormsModule,
     FormsModule,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContatoService } from '../../../core/services/http/contato.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-contatos-add-edit',
@@ -13,6 +14,8 @@ export class ContatosAddEditComponent implements OnInit {
   form!: FormGroup;
 
   contatoId: number = 0;
+
+  files: any[] = [];
 
   constructor(private route: ActivatedRoute,
               private service: ContatoService,
@@ -28,27 +31,69 @@ export class ContatosAddEditComponent implements OnInit {
     }
   }
 
+  async getBase64(file: File) {
+    var fileReader = new FileReader();
+    if (file) {
+        fileReader.readAsDataURL(file);
+    }
+    return new Promise((resolve, reject) => {
+      fileReader.onload = function(event) {
+        resolve(event.target?.result);
+      };
+    })
+  }
+
+  onSelect(event: any) {
+    this.files.push(...event.addedFiles);
+  }
+
+  onRemove(event: any) {
+    this.files.splice(this.files.indexOf(event), 1);
+  }
+
   private creatForm(): void {
     this.form = this.fb.group({
-      nome: [null, [Validators.required]],
-      email: [null, [Validators.required]],
-      telefone: [null, [Validators.required]],
+      id: [null],
+      nome: [null],
+      email: [null],
+      telefone: [null]
     });
   }
 
   private findById(id: number) {
     this.service.getById(id).subscribe({
-      next: (value) => { this.form.patchValue(value) },
+      next: (contato) => {
+        this.files.push(this.dataURLtoFile(contato.foto, 'file'))
+        this.form.patchValue(contato)
+       },
       error: (err) => { console.log(err) }, 
       complete: () =>  { }
     })
+  }
+
+  dataURLtoFile(dataurl: any, filename: any) {
+    var arr = dataurl.split(','),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[arr.length - 1]), 
+        n = bstr.length, 
+        u8arr = new Uint8Array(n);
+    while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, {type:mime});
   }
 
   private update(contato: any) {
     this.service.update(contato).subscribe({
       next: (value) => { console.log(value) },
       error: (err) => { console.log(err) }, 
-      complete: () =>  { this.goToList() }
+      complete: () =>  { 
+        Swal.fire({
+          title: "Ação concluída com sucesso!",
+          icon: "success"
+        });
+        this.goToList()
+       }
     })
   }
 
@@ -56,12 +101,20 @@ export class ContatosAddEditComponent implements OnInit {
     this.service.create(contato).subscribe({
       next: (value) => { console.log(value) },
       error: (err) => { console.log(err) }, 
-      complete: () =>  { this.goToList() }
+      complete: () =>  { 
+        Swal.fire({
+          title: "Ação concluída com sucesso!",
+          icon: "success"
+        });
+        this.goToList()
+       }
     })
   }
 
-  salvar() {
-    const formData = this.form.getRawValue();
+  async salvar() {
+    let formData = this.form.getRawValue();
+
+    formData.foto = await this.getBase64(this.files[0]);
 
     !!formData.id ? this.update(formData) : this.create(formData);
   }

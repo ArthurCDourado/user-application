@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContatoService } from '../../../core/services/http/contato.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-contatos-list',
@@ -20,17 +21,25 @@ export class ContatosListComponent implements OnInit {
 
   private findAll() {
     this.service.getAll().subscribe({
-      next: (value) => { this.contatos = value },
+      next: (value) => { 
+        this.contatos = value 
+      },
       error: (err) => { console.log(err) }, 
       complete: () =>  { }
     })
   }
 
-  private deleteById(id: number) {
+  deleteById(id: number) {
     this.service.deleteById(id).subscribe({
       next: (value) => { console.log(value) },
       error: (err) => { console.log(err) }, 
-      complete: () =>  { console.log('Do something else') }
+      complete: () =>  { 
+        Swal.fire({
+          title: "Ação concluída com sucesso!",
+          icon: "success"
+        });
+        this.findAll();
+       }
     })
   }
 

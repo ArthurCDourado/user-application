@@ -41,7 +41,7 @@ export class ContatoService {
 
   public deleteById(id: number) {
     const params = new HttpParams()
-      .set('id', id);
+      .set('idContato', id);
 
     return this.http
       .delete<any>(`${this.API}/DeleteContato`, {params})

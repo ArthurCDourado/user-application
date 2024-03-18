@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpInterceptorService } from './core/interceptors/interceptor-http.service';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    SweetAlert2Module.forRoot(),
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,

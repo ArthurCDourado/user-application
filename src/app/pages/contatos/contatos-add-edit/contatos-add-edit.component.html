@@ -1,47 +1,68 @@
 <div class="container">
-    <form [formGroup]="form" (ngSubmit)="salvar()">
-        <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-8 col-sm-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col">
-                                <h4 class="card-title">{{!!contatoId ? 'Editar Contato' : 'Cadastrar Contato'}}</h4>
+    <div class="row mb-3">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a>Home</a></li>
+                    <li class="breadcrumb-item cursor-pointer"><a class="link-secondary" (click)="goToList()">Contatos</a></li>
+                    <li class="breadcrumb-item text-secondary active" aria-current="page">{{!!contatoId ? 'Editar Contato' : 'Cadastrar Contato'}}</li>
+                </ol>
+            </nav>
+        </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+            <h3>{{!!contatoId ? 'Editar Contato' : 'Cadastrar Contato'}}</h3>
+            </div>
+        </div>
+        <form [formGroup]="form" (ngSubmit)="salvar()">
+            <div class="row justify-content-center">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row mb-3 mt-2">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input type="text" id="nome" class="form-control" formControlName="nome">
+                                        <label for="nome">Nome </label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col">
-                                <div class="form-floating">
-                                    <input type="text" id="nome" class="form-control" formControlName="nome">
-                                    <label for="nome">Nome </label>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input type="email" id="email" class="form-control" formControlName="email">
+                                        <label for="email">Email </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input type="text" id="telefone" class="form-control" formControlName="telefone" [mask]="'(00) 0 0000-0000||(00) 0000-0000'">
+                                        <label for="telefone">Telefone </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <ngx-dropzone (change)="onSelect($event)" [multiple]="false">
+                                        <ngx-dropzone-label>Clique ou solte seu arquivo aqui!</ngx-dropzone-label>
+                                        <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                                            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                        </ngx-dropzone-preview>
+                                    </ngx-dropzone>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col text-end">
+                                <button class="btn btn-secondary btn-block mx-1" type="button" (click)="goToList()">Cancelar</button>
+                                <button class="btn btn-primary btn-block mx-1" type="submit">Salvar</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col">
-                                <div class="form-floating">
-                                    <input type="text" id="email" class="form-control" formControlName="email">
-                                    <label for="email">Email </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col">
-                                <div class="form-floating">
-                                    <input type="text" id="telefone" class="form-control" formControlName="telefone">
-                                    <label for="telefone">Telefone </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col text-end">
-                              <button class="btn btn-secondary btn-block mx-1" type="button" (click)="goToList()">Cancelar</button>
-                              <button class="btn btn-primary btn-block mx-1" type="submit">Salvar</button>
-                            </div>
-                          </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
 </div>

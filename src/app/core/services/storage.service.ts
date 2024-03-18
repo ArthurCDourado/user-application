@@ -7,13 +7,13 @@ export class StorageService {
   constructor(private sessionStorage: SessionStorageService) { }
 
   @SessionStorage('tk')
-  private _token: string = '';
+  private _token?: string;
 
   set token(token: string) {
     this._token = token;
   }
 
-  get token(): string {
+  get token(): string | undefined {
     return this._token;
   }
 

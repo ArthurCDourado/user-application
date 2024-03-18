@@ -2,6 +2,19 @@
 /* @import '~bootstrap/dist/css/bootstrap.min.css'; */
 /* @import "~bootstrap-icons/font/bootstrap-icons.css"; */
 
+@font-face {
+    font-family: 'Montserrat';
+    src: url('assets/font/Montserrat-Medium.ttf');
+}
+
+* {
+    font-family: 'Montserrat', monospace;
+}
+
 .cursor-pointer {
     cursor: pointer;
+}
+
+a {
+    text-decoration: none;
 }
