@@ -3,11 +3,13 @@ import { Observable, catchError, throwError } from "rxjs";
 import { Constant } from "../config/constant.config";
 import { StorageService } from "../services/storage.service";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { HTTPStatus } from "../models/http-status.model";
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
 
-  constructor(private storage: StorageService) { }
+  constructor(private storage: StorageService, private router: Router) { }
 
   buildHeader(request: HttpRequest<any>): object {
     const authToken = `Bearer ${this.storage.token}`
@@ -31,30 +33,18 @@ export class HttpInterceptorService implements HttpInterceptor {
           if (error instanceof HttpErrorResponse) {
             switch (error.status) {
               // case HTTPStatus.INTERNAL_SERVER_ERROR:
-              //   this.routeService.go([Constant.routes['500']]);
-              //   break;
-
-              // case HTTPStatus.FORBIDDEN:
-              //   this.wStorage.clear();
-              //   this.routeService.go([Constant.routes.login]);
-              //   setTimeout(() => {
-              //     this._alert.warning('Você não possui permissão para executar esta ação.');
-              //   });
-              //   break;
+              //   console.log('Erro interno no servidor!');
+              // break;
 
               // case HTTPStatus.UNAUTHORIZED:
-              //   this.wStorage.clear();
-              //   this.routeService.go([Constant.routes.login]);
-              //   setTimeout(() => {
-              //     this._alert.warning('Sua sessão expirou, por favor, autentique-se novamente.');
-              //   });
-              //   break;
+              //   this.storage.clear();
+              //   this.router.navigate(['/account/login']);
+              //   console.log('Você não possui permissão para essa funcionalidade!');
+              // break;
 
               // case HTTPStatus.BAD_REQUEST:
-              //   setTimeout(() => {
-              //     this._alert.danger('Um erro ocorreu. Por favor contate nosso suporte.', `${error?.error?.message}`);
-              //   });
-              //   break;
+              //   console.log('Um erro ocorreu. Por favor contate nosso suporte.');
+              // break;
 
               default:
                 break;

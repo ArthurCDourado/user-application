@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ContatoService } from '../../../core/services/http/contato.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import moment from 'moment';
 
 @Component({
   selector: 'app-contatos-add-edit',
@@ -53,17 +54,19 @@ export class ContatosAddEditComponent implements OnInit {
 
   private creatForm(): void {
     this.form = this.fb.group({
-      id: [null],
-      nome: [null],
-      email: [null],
-      telefone: [null]
+      id: [''],
+      nome: [''],
+      email: [''],
+      telefone: ['']
     });
   }
 
   private findById(id: number) {
     this.service.getById(id).subscribe({
       next: (contato) => {
-        this.files.push(this.dataURLtoFile(contato.foto, 'file'))
+        if (!!contato.foto) {
+          this.files.push(this.dataURLtoFile(contato.foto, 'file'))
+        }
         this.form.patchValue(contato)
        },
       error: (err) => { console.log(err) }, 
@@ -116,7 +119,13 @@ export class ContatosAddEditComponent implements OnInit {
 
     formData.foto = await this.getBase64(this.files[0]);
 
-    !!formData.id ? this.update(formData) : this.create(formData);
+    if (!!formData.id) {
+      this.update(formData)
+      return;
+    }
+
+    delete formData.id
+    this.create(formData)
   }
 
   goToList() {
