@@ -1,1 +1,38 @@
-<p>users-list works!</p>
+<div class="container">
+  <div class="row mb-3">
+    <div class="col text-end">
+      <button class="btn btn-primary btn-block" type="button" (click)="goToCreateEdit()">Cadastrar</button>
+    </div>
+  </div>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">Ações</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let contato of contatos; let i = index;">
+                            <th># {{contato.id}}</th>
+                            <td>{{contato.nome}}</td>
+                            <td>{{contato.email}}</td>
+                            <td>{{contato.telefone}}</td>
+                            <td>
+                                <i class="fa fa-pencil mx-1"></i>
+                                <i class="fa fa-trash mx-1 text-danger"></i>
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

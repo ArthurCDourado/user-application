@@ -4,7 +4,7 @@ import { SessionStorage, SessionStorageService } from 'ngx-webstorage';
 @Injectable({ providedIn: 'root' })
 export class StorageService {
 
-  constructor(private storage: SessionStorageService) { }
+  constructor(private sessionStorage: SessionStorageService) { }
 
   @SessionStorage('tk')
   private _token: string = '';
@@ -18,7 +18,7 @@ export class StorageService {
   }
 
   clear() {
-    this.storage.clear();
+    this.sessionStorage.clear();
   }
 
   isAuthenticated() {

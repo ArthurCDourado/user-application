@@ -4,6 +4,7 @@ import { ContatosListComponent } from './contatos-list/contatos-list.component';
 import { ContatosRoutingModule } from './contatos-routing.module';
 import { CoreModule } from '../../core/core.module';
 import { ContatosAddEditComponent } from './contatos-add-edit/contatos-add-edit.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -14,6 +15,8 @@ import { ContatosAddEditComponent } from './contatos-add-edit/contatos-add-edit.
   ],
   imports: [
     CoreModule,
+    ReactiveFormsModule,
+    FormsModule,
     CommonModule,
     ContatosRoutingModule
   ]

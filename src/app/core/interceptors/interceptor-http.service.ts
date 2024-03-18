@@ -12,6 +12,10 @@ export class HttpInterceptorService implements HttpInterceptor {
   buildHeader(request: HttpRequest<any>): object {
     const authToken = `Bearer ${this.storage.token}`
 
+    console.log(request.headers.has('Authorization'));
+    console.log(this.storage.isAuthenticated());
+    
+
     return {
       setHeaders: {
         ...!(request.headers.has('Authorization')) && {'Authorization': this.storage.isAuthenticated() ? authToken : ''},
@@ -30,17 +34,31 @@ export class HttpInterceptorService implements HttpInterceptor {
         catchError((error) => {
           if (error instanceof HttpErrorResponse) {
             switch (error.status) {
-            //   case HTTPStatus.INTERNAL_SERVER_ERROR:
-            //     this.router.navigate(['500'])
-            //     break;
+              // case HTTPStatus.INTERNAL_SERVER_ERROR:
+              //   this.routeService.go([Constant.routes['500']]);
+              //   break;
 
-            //   case HTTPStatus.UNAUTHORIZED:
-            //     this.storage.clear();
-            //     this.router.navigate(['contatos/list'])
-            //     setTimeout(() => {
-            //       this._alert.warning('Sua sessão expirou, por favor, autentique-se novamente.');
-            //     });
-            //     break;
+              // case HTTPStatus.FORBIDDEN:
+              //   this.wStorage.clear();
+              //   this.routeService.go([Constant.routes.login]);
+              //   setTimeout(() => {
+              //     this._alert.warning('Você não possui permissão para executar esta ação.');
+              //   });
+              //   break;
+
+              // case HTTPStatus.UNAUTHORIZED:
+              //   this.wStorage.clear();
+              //   this.routeService.go([Constant.routes.login]);
+              //   setTimeout(() => {
+              //     this._alert.warning('Sua sessão expirou, por favor, autentique-se novamente.');
+              //   });
+              //   break;
+
+              // case HTTPStatus.BAD_REQUEST:
+              //   setTimeout(() => {
+              //     this._alert.danger('Um erro ocorreu. Por favor contate nosso suporte.', `${error?.error?.message}`);
+              //   });
+              //   break;
 
               default:
                 break;

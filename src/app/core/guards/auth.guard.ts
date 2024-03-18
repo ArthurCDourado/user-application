@@ -11,8 +11,6 @@ export class AuthGuard  {
   canActivate(): Observable<boolean> | boolean {
 
     if (this.storage.isAuthenticated()) {
-      console.log('autenticado');
-      
       return true;
     }
 
