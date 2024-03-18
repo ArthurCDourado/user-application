@@ -22,7 +22,7 @@ export class ContatosListComponent implements OnInit {
     this.service.getAll().subscribe({
       next: (value) => { this.contatos = value },
       error: (err) => { console.log(err) }, 
-      complete: () =>  { console.log('Do something else') }
+      complete: () =>  { }
     })
   }
 
@@ -34,7 +34,11 @@ export class ContatosListComponent implements OnInit {
     })
   }
 
-  goToCreateEdit() {
+  goToCreate() {
     this.router.navigate(['contatos/add']);
+  }
+
+  goToEdit(id: number) {
+    this.router.navigate(['contatos/edit', id]);
   }
 }

@@ -32,10 +32,10 @@ export class ContatoService {
 
   public getById(id: number) {
     const params = new HttpParams()
-      .set('id', id);
+      .set('idContato', id);
 
     return this.http
-      .get<any>(`${this.API}/GetContatos`, {params})
+      .get<any>(`${this.API}/GetContatoById`, {params})
       .pipe(take(1));
   }
 

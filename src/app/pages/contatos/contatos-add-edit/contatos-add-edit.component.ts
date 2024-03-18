@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ContatoService } from '../../../core/services/http/contato.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -12,25 +12,35 @@ export class ContatosAddEditComponent implements OnInit {
 
   form!: FormGroup;
 
-  constructor(private route: ActivatedRoute, private service: ContatoService, private fb: FormBuilder) {}
+  contatoId: number = 0;
+
+  constructor(private route: ActivatedRoute,
+              private service: ContatoService,
+              private fb: FormBuilder,
+              private router: Router) {}
 
   ngOnInit(): void {
-    // console.log(this.route.snapshot.params['id']);
-
     this.creatForm();
+
+    this.contatoId = this.route.snapshot.params['id']
+    if (!!this.contatoId) {
+      this.findById(this.contatoId)
+    }
   }
 
   private creatForm(): void {
     this.form = this.fb.group({
-      username: [null, [Validators.required]],
-      password: [null, [Validators.required]],
+      nome: [null, [Validators.required]],
+      email: [null, [Validators.required]],
+      telefone: [null, [Validators.required]],
     });
   }
+
   private findById(id: number) {
     this.service.getById(id).subscribe({
-      next: (value) => { console.log(value) },
+      next: (value) => { this.form.patchValue(value) },
       error: (err) => { console.log(err) }, 
-      complete: () =>  { console.log('Do something else') }
+      complete: () =>  { }
     })
   }
 
@@ -38,7 +48,7 @@ export class ContatosAddEditComponent implements OnInit {
     this.service.update(contato).subscribe({
       next: (value) => { console.log(value) },
       error: (err) => { console.log(err) }, 
-      complete: () =>  { console.log('Do something else') }
+      complete: () =>  { this.goToList() }
     })
   }
 
@@ -46,7 +56,7 @@ export class ContatosAddEditComponent implements OnInit {
     this.service.create(contato).subscribe({
       next: (value) => { console.log(value) },
       error: (err) => { console.log(err) }, 
-      complete: () =>  { console.log('Do something else') }
+      complete: () =>  { this.goToList() }
     })
   }
 
@@ -56,4 +66,7 @@ export class ContatosAddEditComponent implements OnInit {
     !!formData.id ? this.update(formData) : this.create(formData);
   }
 
+  goToList() {
+    this.router.navigate(['contatos/list']);
+  }
 }
