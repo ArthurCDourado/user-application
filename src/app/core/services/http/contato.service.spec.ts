@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { ContatoService } from './contato.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { Constant } from '../../config/constant.config';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 const API = `${Constant.api}/users`;
 
@@ -11,9 +12,9 @@ describe('ContatoService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [ContatoService]
-    });
+    imports: [],
+    providers: [ContatoService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     service = TestBed.inject(ContatoService);
     httpMock = TestBed.inject(HttpTestingController);
   });
