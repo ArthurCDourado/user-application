@@ -8,15 +8,11 @@ import { take } from 'rxjs';
 })
 export class AuthService {
 
-  private readonly api: string = `${Constant.api}/Auth`;
+  private readonly api: string = `${Constant.api}/auth`;
 
   constructor(protected http: HttpClient) { }
 
   login(username: string, password: string) {
-    const params = new HttpParams()
-      .set('login', username)
-      .set('senha', password);
-
-    return this.http.get<any>(`${this.api}/Login`, {params}).pipe(take(1));
+    return this.http.post<any>(`${this.api}/login`, {username: username, password: password}).pipe(take(1));
   }
 }

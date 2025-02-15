@@ -17,6 +17,8 @@ Funcionalidades:
 
 Tecnologias Utilizadas:
 
+    DummyJSON, Free Fake REST API: API placeholder utilizada no projeto. OBS: Alguns comportamentos estranhos podem acontecer devido as respostas da API.
+
     Angular: Um framework de desenvolvimento web baseado em TypeScript para a construção de aplicações SPA (Single Page Application).
 
     Bootstrap: Uma ferramenta valiosa para o desenvolvimento frontend, permitindo aos desenvolvedores criar rapidamente interfaces web modernas e responsivas, economizando tempo e esforço no processo de desenvolvimento.

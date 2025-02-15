@@ -10,41 +10,48 @@ export class ContatoService {
 
   constructor(protected http: HttpClient) { }
 
-  private readonly API = `${Constant.api}/Contatos`;
+  private readonly API = `${Constant.api}/users`;
 
   public getAll() {
+    const params = new HttpParams()
+    .set('limit', 10);
+
     return this.http
-      .get<any>(`${this.API}/GetContatos`)
+      .get<any>(`${this.API}`, {params})
       .pipe(take(1));
   }
 
   public create(contato: any) {
     return this.http
-      .post(`${this.API}/CreateContato`, contato)
+      .post(`${this.API}/add`, contato)
       .pipe(take(1));
   }
 
   public update(contato: any) {
     return this.http
-      .put(`${this.API}/UpdateContato`, contato)
+      .put(`${this.API}/${contato.id}`, contato)
       .pipe(take(1));
   }
 
   public getById(id: number) {
+    return this.http
+      .get<any>(`${this.API}/${id}`)
+      .pipe(take(1));
+  }
+
+  public getByName(name: string) {
     const params = new HttpParams()
-      .set('idContato', id);
+    .set('limit', 10)
+    .set('q', name);
 
     return this.http
-      .get<any>(`${this.API}/GetContatoById`, {params})
+      .get<any>(`${this.API}`, { params: params })
       .pipe(take(1));
   }
 
   public deleteById(id: number) {
-    const params = new HttpParams()
-      .set('idContato', id);
-
     return this.http
-      .delete<any>(`${this.API}/DeleteContato`, {params})
+      .delete<any>(`${this.API}/${id}`)
       .pipe(take(1));
   }
 }

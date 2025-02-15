@@ -4,7 +4,6 @@ import { Constant } from "../config/constant.config";
 import { StorageService } from "../services/storage.service";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { HTTPStatus } from "../models/http-status.model";
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
@@ -38,7 +37,6 @@ export class HttpInterceptorService implements HttpInterceptor {
 
               // case HTTPStatus.UNAUTHORIZED:
               //   this.storage.clear();
-              //   this.router.navigate(['/account/login']);
               //   console.log('Você não possui permissão para essa funcionalidade!');
               // break;
 

@@ -12,7 +12,7 @@
         </div>
         <div class="row mb-3">
             <div class="col">
-            <h3>{{!!contatoId ? 'Editar Contato' : 'Cadastrar Contato'}}</h3>
+                <h3>{{!!contatoId ? 'Editar Contato' : 'Cadastrar Contato'}}</h3>
             </div>
         </div>
         <form [formGroup]="form" (ngSubmit)="salvar()">
@@ -23,7 +23,7 @@
                             <div class="row mb-3 mt-2">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <input type="text" id="nome" class="form-control" formControlName="nome">
+                                        <input type="text" id="nome" class="form-control" formControlName="firstName">
                                         <label for="nome">Nome </label>
                                     </div>
                                 </div>
@@ -39,19 +39,9 @@
                             <div class="row mb-3">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <input type="text" id="telefone" class="form-control" formControlName="telefone" [mask]="'(00) 0 0000-0000||(00) 0000-0000'">
+                                        <input type="text" id="telefone" class="form-control" formControlName="phone">
                                         <label for="telefone">Telefone </label>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <ngx-dropzone (change)="onSelect($event)" [multiple]="false">
-                                        <ngx-dropzone-label>Clique ou solte seu arquivo aqui!</ngx-dropzone-label>
-                                        <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-                                            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-                                        </ngx-dropzone-preview>
-                                    </ngx-dropzone>
                                 </div>
                             </div>
                             <div class="row mb-3">

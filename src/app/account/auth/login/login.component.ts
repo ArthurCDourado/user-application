@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
 
   private creatForm(): void {
     this.form = this.fb.group({
-      username: [null, [Validators.required]],
-      password: [null, [Validators.required]],
+      username: ['emilys', [Validators.required]],
+      password: ['emilyspass', [Validators.required]],
     });
   }
   
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(formValue.username, formValue.password)
         .subscribe({
                 next: (response) => {
-                    this.storageService.token = response.token;
+                    this.storageService.token = response.accessToken;
                   
                     this.goToContatos();
                 },
